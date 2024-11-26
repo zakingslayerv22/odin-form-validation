@@ -1,11 +1,82 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
-<body>
-    
-</body>
+  </head>
+  <body>
+    <div class="signup-form">
+      <form action="" method="post" id="form-1" novalidate>
+        <h3>Let's do this!</h3>
+        <p>All fields marked asterisks (*) are required.</p>
+        <!-- <div class="basic-details"> -->
+        <div class="email">
+          <label for="email">Email Address * </label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="Email Address"
+          />
+          <span id="email-info" aria-live="polite"></span>
+        </div>
+        <div class="country">
+          <label for="country">Country *</label>
+          <select id="country">
+            <option value="ch">Switzerland</option>
+            <option value="fr">France</option>
+            <option value="de">Germany</option>
+            <option value="nl">The Netherlands</option>
+          </select>
+          <span id="country-info" aria-live="polite"></span>
+        </div>
+        <span id="country-info"></span>
+        <!-- </div> -->
+
+        <!-- <div class="zipcode"> -->
+        <div class="zipcode">
+          <label for="zipcode">Zip Code</label>
+          <input
+            type="text"
+            id="zipcode"
+            name="zipcode"
+            placeholder="ZIP Code or Postal Address"
+          />
+          <span id="zipcode-info" aria-live="polite"></span>
+        </div>
+        <!-- </div> -->
+
+        <div class="passwords">
+          <div class="password-1">
+            <label for="password-1">Password *</label>
+            <input
+              type="password"
+              id="password-1"
+              name="password"
+              placeholder="Password"
+              onkeyup="passwordConfirm()"
+            />
+            <span id="password-match-info" aria-live="polite"></span>
+          </div>
+          <div class="password-2">
+            <label for="confirm-password">Confirm Password *</label>
+            <input
+              type="password"
+              id="confirm-password"
+              name="confirm-password"
+              placeholder="Password again"
+              onkeyup="passwordConfirm()"
+            />
+            <span id="password-match-info" aria-live="polite"></span>
+          </div>
+        </div>
+      </form>
+
+      <div class="button-div">
+        <button type="submit" form="form-1">Create Account</button>
+        <p>Already have an account? <a href="">Login.</a></p>
+      </div>
+    </div>
+  </body>
 </html>
