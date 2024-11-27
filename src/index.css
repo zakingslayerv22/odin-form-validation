@@ -74,3 +74,19 @@ button {
   -webkit-box-shadow: 2px 5px 5px 0px rgba(198, 186, 186, 0.75);
   -moz-box-shadow: 2px 5px 5px 0px rgba(198, 186, 186, 0.75);
 }
+
+input:valid {
+  color: green;
+  border: 2px solid green;
+  outline: none;
+}
+
+input:placeholder-shown {
+  border: 1px solid rgb(209, 205, 205);
+}
+
+input:invalid {
+  color: red;
+  border: 2px solid red;
+  outline: none;
+}
