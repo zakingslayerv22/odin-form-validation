@@ -40,6 +40,7 @@ class ValidateForm {
     this.validateEmail();
     this.validateCountry();
     this.validateZipCode();
+    this.initializePasswordValidation();
   }
 
   validateEmail() {
@@ -129,6 +130,17 @@ class ValidateForm {
     }
 
     this.confirmPassword.reportValidity();
+  }
+
+  initializePasswordValidation() {
+    this.password.addEventListener("focusout", () => {
+      this.validatePasswordField();
+      this.validateConfirmPasswordField();
+    });
+
+    this.confirmPassword.addEventListener("focusout", () => {
+      this.validateConfirmPasswordField();
+    });
   }
 }
 
