@@ -30,6 +30,9 @@ class ValidateForm {
       this.constraints[this.countrySelectField.value][0],
     );
 
+    this.password = document.querySelector("#password-1");
+    this.confirmPassword = document.querySelector("#confirm-password");
+
     if (this.form) this.initialize();
   }
 
@@ -93,6 +96,39 @@ class ValidateForm {
         this.zipcodeInputField.reportValidity();
       }
     });
+  }
+
+  validatePasswordField() {
+    const constraint = [
+      /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,14}$/,
+      "Password must be between 8-14 characters. It must contain one lowercase, one uppercase, one number, and one special character.",
+    ];
+
+    const passwordRegExp = new RegExp(constraint[0]);
+
+    if (this.password.value.length === 0) {
+      this.password.setCustomValidity("Password field cannot be empty");
+    } else if (!passwordRegExp.test(this.password.value)) {
+      this.password.setCustomValidity(constraint[1]);
+    } else {
+      this.password.setCustomValidity("");
+    }
+
+    this.password.reportValidity();
+  }
+
+  validateConfirmPasswordField() {
+    if (this.password.value.length && !this.confirmPassword.value.length) {
+      this.confirmPassword.setCustomValidity(
+        "Confirm Password field cannot be empty.",
+      );
+    } else if (this.password.value !== this.confirmPassword.value) {
+      this.confirmPassword.setCustomValidity("Passwords do not match.");
+    } else {
+      this.confirmPassword.setCustomValidity("");
+    }
+
+    this.confirmPassword.reportValidity();
   }
 }
 
