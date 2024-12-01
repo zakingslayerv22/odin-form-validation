@@ -35,6 +35,8 @@ class ValidateForm {
 
   initialize() {
     this.validateEmail();
+    this.validateCountry();
+    this.validateZipCode();
   }
 
   validateEmail() {
@@ -74,6 +76,23 @@ class ValidateForm {
     }
 
     return matchesPattern;
+  }
+
+  validateCountry() {
+    this.countrySelectField.addEventListener("change", (event) => {
+      this.currentConstraint = new RegExp(
+        this.constraints[event.target.value][0],
+      );
+      this.validateCountryAndZipCondition();
+    });
+  }
+
+  validateZipCode() {
+    this.zipcodeInputField.addEventListener("focusout", () => {
+      if (!this.validateCountryAndZipCondition()) {
+        this.zipcodeInputField.reportValidity();
+      }
+    });
   }
 }
 
