@@ -45,15 +45,22 @@ class ValidateForm {
     this.initializePasswordValidation();
   }
 
-  checkForEmptyEmailField() {
-    const isNotEmpty = this.emailInput.value.length !== 0;
-    if (!isNotEmpty) {
-      this.emailInput.setCustomValidity(this.emptyFieldMessage);
-    } else {
-      this.emailInput.setCustomValidity("");
-    }
+  checkForEmptyInput(...inputFields) {
+    let allNotEmpty = true;
 
-    return isNotEmpty;
+    inputFields.forEach((inputField) => {
+      const isNotEmpty = inputField.value.length !== 0;
+      if (!isNotEmpty) {
+        inputField.setCustomValidity(this.emptyFieldMessage);
+        allNotEmpty = false;
+      } else {
+        inputField.setCustomValidity("");
+      }
+
+      inputField.reportValidity();
+    });
+
+    return allNotEmpty;
   }
 
   checkForEmailPattern() {
@@ -66,7 +73,7 @@ class ValidateForm {
 
   validateEmail() {
     this.emailInput.addEventListener("focusout", () => {
-      if (!this.checkForEmptyEmailField()) {
+      if (!this.checkForEmptyInput(this.emailInput)) {
         this.emailInput.setCustomValidity("Email field cannot be empty.");
       } else if (!this.checkForEmailPattern()) {
         this.emailInput.setCustomValidity(
