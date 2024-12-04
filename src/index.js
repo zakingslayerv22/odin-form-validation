@@ -127,30 +127,38 @@ class ValidateForm {
     ];
 
     const passwordRegExp = new RegExp(constraint[0]);
+    const matchesPattern = passwordRegExp.test(this.password.value);
 
     if (this.password.value.length === 0) {
       this.password.setCustomValidity("Password field cannot be empty");
-    } else if (!passwordRegExp.test(this.password.value)) {
+    } else if (!matchesPattern) {
       this.password.setCustomValidity(constraint[1]);
     } else {
       this.password.setCustomValidity("");
     }
 
     this.password.reportValidity();
+
+    return matchesPattern;
   }
 
   validateConfirmPasswordField() {
+    const matchesPasswordInput =
+      this.password.value === this.confirmPassword.value;
+
     if (this.password.value.length && !this.confirmPassword.value.length) {
       this.confirmPassword.setCustomValidity(
         "Confirm Password field cannot be empty.",
       );
-    } else if (this.password.value !== this.confirmPassword.value) {
+    } else if (!matchesPasswordInput) {
       this.confirmPassword.setCustomValidity("Passwords do not match.");
     } else {
       this.confirmPassword.setCustomValidity("");
     }
 
     this.confirmPassword.reportValidity();
+
+    return matchesPasswordInput;
   }
 
   initializePasswordValidation() {
