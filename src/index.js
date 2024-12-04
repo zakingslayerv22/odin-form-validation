@@ -43,6 +43,7 @@ class ValidateForm {
     this.validateCountry();
     this.validateZipCode();
     this.initializePasswordValidation();
+    this.validateOnSubmit();
   }
 
   checkForEmptyInput(...inputFields) {
@@ -169,6 +170,32 @@ class ValidateForm {
 
     this.confirmPassword.addEventListener("focusout", () => {
       this.validateConfirmPasswordField();
+    });
+  }
+
+  validateOnSubmit() {
+    const submitButton = document.querySelector("#submit-button");
+
+    submitButton.addEventListener("click", (event) => {
+      if (
+        !this.checkForEmptyInput(
+          this.emailInput,
+          this.zipcodeInputField,
+          this.password,
+          this.confirmPassword,
+        )
+      ) {
+        event.preventDefault();
+      } else if (
+        !this.checkForEmailPattern ||
+        !this.validateCountryAndZipCondition() ||
+        !this.validatePasswordField() ||
+        !this.validateConfirmPasswordField()
+      ) {
+        event.preventDefault();
+      } else {
+        console.log("All good! Form submitted.");
+      }
     });
   }
 }
