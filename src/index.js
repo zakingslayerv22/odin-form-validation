@@ -3,6 +3,8 @@ import "./index.css";
 class ValidateForm {
   constructor() {
     this.form = document.querySelector("form");
+    this.emptyFieldMessage = "This field cannot be empty.";
+    this.emailInput = document.querySelector("#email");
     this.countrySelectField = document.querySelector("#country");
     this.zipcodeInputField = document.querySelector("#zipcode");
 
@@ -43,26 +45,38 @@ class ValidateForm {
     this.initializePasswordValidation();
   }
 
-  validateEmail() {
-    const emailInput = document.querySelector("#email");
+  checkForEmptyEmailField() {
+    const isNotEmpty = this.emailInput.value.length !== 0;
+    if (!isNotEmpty) {
+      this.emailInput.setCustomValidity(this.emptyFieldMessage);
+    } else {
+      this.emailInput.setCustomValidity("");
+    }
 
+    return isNotEmpty;
+  }
+
+  checkForEmailPattern() {
     const emailRegExp = /^[a-zA-Z0-9]{4}@thecompany\.com$/;
 
-    emailInput.addEventListener("focusout", () => {
-      const isEmpty = emailInput.value.length === 0;
-      const isValid = emailRegExp.test(emailInput.value);
+    const isValid = emailRegExp.test(this.emailInput.value);
 
-      if (isEmpty) {
-        emailInput.setCustomValidity("Email field cannot be empty");
-      } else if (!isValid) {
-        emailInput.setCustomValidity(
+    return isValid;
+  }
+
+  validateEmail() {
+    this.emailInput.addEventListener("focusout", () => {
+      if (!this.checkForEmptyEmailField()) {
+        this.emailInput.setCustomValidity("Email field cannot be empty.");
+      } else if (!this.checkForEmailPattern()) {
+        this.emailInput.setCustomValidity(
           "Email must have 4 letters/numbers before @thecompany.com",
         );
       } else {
-        emailInput.setCustomValidity("");
+        this.emailInput.setCustomValidity("");
       }
 
-      emailInput.reportValidity();
+      this.emailInput.reportValidity();
     });
   }
 
