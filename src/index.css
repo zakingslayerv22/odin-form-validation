@@ -12,6 +12,12 @@ body {
   align-items: center;
   padding: 4rem 0;
 }
+
+.success {
+  background-color: green;
+  color: white;
+  padding: 0.1rem;
+}
 form {
   max-width: 600px;
 }

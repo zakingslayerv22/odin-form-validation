@@ -7,10 +7,11 @@
   </head>
   <body>
     <div class="signup-form">
-      <form action="" method="post" id="form-1" novalidate>
+      <form action="" id="form-1" novalidate>
         <h3>Let's do this!</h3>
         <p>All fields marked asterisks (*) are required.</p>
         <!-- <div class="basic-details"> -->
+        <span class="success-message"></span>
         <div class="email">
           <label for="email">Email Address * </label>
           <input
@@ -36,7 +37,7 @@
 
         <!-- <div class="zipcode"> -->
         <div class="zipcode">
-          <label for="zipcode">Zip Code</label>
+          <label for="zipcode">Zip Code *</label>
           <input
             type="text"
             id="zipcode"
@@ -55,9 +56,8 @@
               id="password-1"
               name="password"
               placeholder="Password"
-              onkeyup="passwordConfirm()"
             />
-            <span id="password-match-info" aria-live="polite"></span>
+            <!-- <span id="password-match-info" aria-live="polite"></span> -->
           </div>
           <div class="password-2">
             <label for="confirm-password">Confirm Password *</label>
@@ -66,7 +66,6 @@
               id="confirm-password"
               name="confirm-password"
               placeholder="Password again"
-              onkeyup="passwordConfirm()"
             />
             <span id="password-match-info" aria-live="polite"></span>
           </div>
@@ -74,7 +73,9 @@
       </form>
 
       <div class="button-div">
-        <button type="submit" form="form-1">Create Account</button>
+        <button type="button" id="submit-button" form="form-1">
+          Create Account
+        </button>
         <p>Already have an account? <a href="">Login.</a></p>
       </div>
     </div>

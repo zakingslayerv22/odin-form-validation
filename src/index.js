@@ -175,6 +175,8 @@ class ValidateForm {
 
   validateOnSubmit() {
     const submitButton = document.querySelector("#submit-button");
+    const submitSuccessMessage = document.querySelector(".success-message");
+    submitSuccessMessage.textContent = "";
 
     submitButton.addEventListener("click", (event) => {
       if (
@@ -194,7 +196,9 @@ class ValidateForm {
       ) {
         event.preventDefault();
       } else {
-        console.log("All good! Form submitted.");
+        submitSuccessMessage.classList.add("success");
+        submitSuccessMessage.textContent =
+          "Hmmm...looks good. Now, we submitted this!";
       }
     });
   }
